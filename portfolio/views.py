@@ -1,26 +1,21 @@
 from django.shortcuts import render
-from .models import Logo, ContactInfo
+from .models import ContactInfo
 
 def home(request):
-    logo = Logo.objects.first()
-    contact = ContactInfo.objects.first()
+    contact_info = ContactInfo.objects.first()
 
-    if contact:
+    if contact_info:
         print("ContactInfo Details:")
-        print("Name:", contact.name)
-        print("Phone:", contact.phone)
-        print("Email:", contact.email)
-        print("Photo URL:", contact.photo.url if contact.photo else "No photo")
+        print("Name:", contact_info.name)
+        print("Photo URL:", contact_info.photo.url if contact_info.photo else "No photo")
     else:
         print("No ContactInfo object found.")
 
     context = {
-        'logo': logo,
-        'contact': contact
+        'contact': contact_info
     }
 
     # Debugging statements
-    print("Logo:", logo)
-    print("ContactInfo:", contact)
+    print("ContactInfo:", contact_info)
 
     return render(request, 'portfolio/home.html', context)

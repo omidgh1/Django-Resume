@@ -1,43 +1,28 @@
-<!-- portfolio/templates/portfolio/home.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>My Resume</title>
-    <style>
-        /* Simple styling */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        .logo {
-            max-width: 200px;
-        }
-        .contact-info {
-            margin-top: 20px;
-        }
-        .contact-info img {
-            max-width: 150px;
-            border-radius: 50%;
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Portfolio</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
-    {% if logo %}
-        <img src="{{ logo.logo.url }}" alt="Logo" class="logo">
-    {% endif %}
+    <div class="container">
+        <div class="sidebar">
+            <div class="profile-wrapper">
+                <!-- Use ContactInfo model data for the image and name -->
+                <img src="{{ contact.photo.url }}" alt="Profile Photo" class="profile-pic">
+                <h1 class="name">{{ contact.name }}</h1>
+            </div>
+        </div>
 
-    <div class="contact-info">
-        {% if contact %}
-            <h2>{{ contact.name }}</h2>
-            <p>Phone: {{ contact.phone }}</p>
-            <p>Email: <a href="mailto:{{ contact.email }}">{{ contact.email }}</a></p>
-            {% if contact.photo %}
-                <img src="{{ contact.photo.url }}" alt="Personal Photo">
-            {% endif %}
-        {% else %}
-            <p>No contact information available.</p>
-        {% endif %}
+        <div class="main-content">
+            <h1 class="greeting">HELLO,</h1>
+            <p class="description">
+                I am {{ contact.name }}, web developer from Melbourne, Australia. I have rich experience in website design and building and customization, also I am good at WordPress.
+            </p>
+        </div>
     </div>
 </body>
 </html>

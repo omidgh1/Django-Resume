@@ -18,10 +18,58 @@
         </div>
 
         <div class="main-content">
+
+
             <h1 class="greeting">HELLO,</h1>
             <p class="description">
-                I am {{ contact.name }}, web developer from Melbourne, Australia. I have rich experience in website design and building and customization, also I am good at WordPress.
+                I am {{ contact.name }}, {{contact.description}}
             </p>
+
+
+            <div class="buttons">
+                <a href="{{ cvfile.file.url }}" class="btn download" target="_blank">Download CV</a>
+                <a href="#hire-me" class="btn hire-me">Hire Me</a>
+            </div>
+
+            <div class="divider"></div> <!-- Divider line -->
+
+            <h1 class="subject-title">Skills</h1>
+            <div class="skills-grid">
+                {% for skill in skills %}
+                <div class="skill-card">
+                    <img src="{{ skill.icon.url }}" alt="Skill Icon" class="skill-icon">
+                    <div class="skill-title">{{ skill.category }}</div>
+                    <div class="skill-list">
+                        {% for skill_name in skill.skills_list %}
+                    <span class="skill-item">{{ skill_name.strip }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="divider"></div> <!-- Divider line -->
+
+
+            <h1 class="subject-title">Experience</h1>
+
+            {% for experience in experiences %}
+                <div>
+                    <h3>{{ experience.company_name }}</h3>
+                    <p>{{ experience.job_position }}</p>
+                    <p>{{ experience.start_date_display }} - {{ experience.end_date_display }}</p>
+                    <p>{{ experience.description }}</p>
+                </div>
+            {% endfor %}
+
+
+
+            <div class="divider"></div> <!-- Divider line -->
+
+
+
+
+
         </div>
     </div>
 </body>

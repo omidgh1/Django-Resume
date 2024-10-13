@@ -5,25 +5,42 @@ body {
     font-family: 'Arial', sans-serif;
     background-color: #000;
     color: #fff;
+    overflow-x: hidden; /* Prevents horizontal scrolling */
 }
 
 /* Container for Layout */
 .container {
     display: flex;
+    flex-direction: column; /* Stack elements on small screens */
     height: 100vh;
+}
+
+@media (min-width: 768px) {
+    .container {
+        flex-direction: row; /* Side-by-side layout on larger screens */
+    }
 }
 
 /* Sidebar styling */
 .sidebar {
     background-color: #111;
-    width: 15%;
+    width: 15%; /* Narrow sidebar on larger screens */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
     padding: 20px;
-    position: relative;
-    padding-top: 50px;
+    position: fixed; /* Make sidebar fixed */
+    top: 0; /* Align to the top of the viewport */
+    height: 100vh; /* Full height of the viewport */
+    overflow-y: auto; /* Allow scrolling within the sidebar if content exceeds viewport height */
+}
+
+
+@media (min-width: 768px) {
+    .sidebar {
+        width: 15%; /* Narrow sidebar on larger screens */
+    }
 }
 
 .profile-wrapper {
@@ -31,50 +48,122 @@ body {
 }
 
 .profile-pic {
-    width: 150px;
-    height: 150px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
     object-fit: cover;
     margin-bottom: 20px;
 }
 
+@media (min-width: 768px) {
+    .profile-pic {
+        width: 150px;
+        height: 150px;
+    }
+}
+
 .name {
     color: #fff;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     font-weight: bold;
+}
+
+@media (min-width: 768px) {
+    .name {
+        font-size: 1.5rem;
+    }
 }
 
 /* Main Content Styling */
 .main-content {
-    width: 85%;
+    margin-left: 15%; /* Add margin to push content to the right */
     padding: 20px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     text-align: left;
     background-color: #000;
-    padding-top: 80px;
+    padding-top: 30px;
+    box-sizing: border-box; /* Include padding in width calculation */
+    height: 100vh; /* Ensures main content also takes full height */
+    overflow-y: auto; /* Allow scrolling in the main content if necessary */
+}
+
+@media (min-width: 768px) {
+    .main-content {
+        width: 85%; /* More space on larger screens */
+        padding-top: 80px;
+    }
 }
 
 .greeting {
-    font-size: 4rem;
+    font-size: 2rem;
     font-weight: bold;
     margin: 0px;
-    margin-left: 100px;
     margin-bottom: 20px;
+    text-align: center;
 }
 
+@media (min-width: 768px) {
+    .greeting {
+        font-size: 4rem;
+        margin-left: 100px;
+        text-align: left;
+    }
+}
+
+
+.subject-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+@media (min-width: 768px) {
+    .subject-title {
+        font-size: 2rem;
+        margin-left: 100px;
+        text-align: left;
+    }
+}
+
+
 .description {
-    font-size: 1.2rem;
+    font-size: 1rem;
     margin: 0;
     line-height: 1.5;
-    margin-left: 100px;
+    text-align: justify;
+    margin-left: 10px;
+    margin-right: 10px;
+    width: calc(100% - 20px); /* Ensure the width adapts within the screen */
+    word-wrap: break-word; /* Prevents overflow of long words */
+    box-sizing: border-box; /* Ensures padding and margins are within total width */
+}
+
+@media (min-width: 768px) {
+    .description {
+        font-size: 1.2rem;
+        margin-left: 100px;
+        margin-right: 100px;
+        width: auto; /* Full width on larger screens */
+    }
 }
 
 /* Button styling */
 .buttons {
     display: flex;
     gap: 10px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+@media (min-width: 768px) {
+    .buttons {
+        justify-content: flex-start;
+        margin-left: 100px;
+    }
 }
 
 .btn {
@@ -96,3 +185,131 @@ body {
     color: #000;
     border-radius: 5px;
 }
+
+.titles {
+    font-size: 3rem;
+    font-weight: bold;
+    margin: 0px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+@media (min-width: 768px) {
+    .titles {
+        font-size: 3rem;
+        margin-left: 100px;
+        text-align: left;
+    }
+}
+
+.skills-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; /* Spacing between columns */
+    gap: 20px; /* Space between skill cards */
+    padding: 0 20px;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
+.skill-card {
+    background: transparent;
+    padding: 10px;
+    text-align: center;
+    border-radius: 8px;
+    transition: transform 0.2s;
+    width: 22%; /* Four columns on large screens */
+    box-shadow: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* Align items at the top */
+}
+
+.skill-card:hover {
+    transform: scale(1.05);
+}
+
+.skill-icon {
+    width: 80px; /* Ensure small icon size */
+    height: auto; /* Maintain aspect ratio */
+}
+
+.skill-title {
+    margin: 10px 0;
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    text-align: center;
+}
+
+.skill-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 1; /* Make the skill list grow to fill available space */
+    justify-content: flex-start; /* Align items at the top */
+}
+
+.skill-item {
+    margin: 5px 0;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap; /* Prevent wrapping of long skill names */
+}
+
+/* Mobile view: One column layout */
+@media (max-width: 420px) {
+    .skills-grid {
+        justify-content: center; /* Center the entire grid */
+        margin-left: 0;
+        margin-right: 0;
+        padding: 0 10px;
+    }
+
+    .skill-card {
+        width: 90%; /* Increase card width for single column */
+        margin: 0 auto; /* Center the card horizontally */
+        justify-content: center;
+    }
+
+    .skill-item {
+        white-space: normal; /* Allow wrapping for longer texts in small screens */
+        word-break: break-word; /* Break words if too long */
+    }
+}
+
+/* Tablets and smaller laptops: Two-column layout */
+@media (min-width: 421px) and (max-width: 1024px) {
+    .skill-card {
+        width: 40%; /* Two columns */
+        justify-content: center;
+        margin: 0 auto;
+    }
+}
+
+/* Larger laptops: Three-column layout */
+@media (min-width: 1025px) and (max-width: 1399px) {
+    .skill-card {
+        width: 22%; /* Three columns */
+        margin: 0 auto;
+    }
+}
+
+/* Large desktop screens: Four-column layout */
+@media (min-width: 1400px) {
+    .skill-card {
+        width: 16%; /* Four columns */
+    }
+}
+
+.divider {
+    height: 5px; /* Keeping it thin for testing */
+    background-color: transparent; /* Temporarily make it transparent */
+    border-top: 2px solid gray; /* Add a red top border for visibility */
+    margin: 20px auto; /* Center the divider and add vertical spacing */
+    width: 50%; /* Full width of the container */
+    margin-top: 40px;
+    margin-bottom: 30px;
+}
+
